@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">JournalApp</string>
+    <string name="background_image">BackgroundImage</string>
+    <string name="button_text">LogIn</string>
+</resources>
