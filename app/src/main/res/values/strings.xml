@@ -2,4 +2,6 @@
     <string name="app_name">JournalApp</string>
     <string name="background_image">BackgroundImage</string>
     <string name="button_text">LogIn</string>
+    <string name="client_id">905297409101-5p5ktm75s38atkudn2r13eegrls5jdh1.apps.googleusercontent.com</string>
+    <string name="title_activity_view_entries">ViewEntriesActivity</string>
 </resources>
