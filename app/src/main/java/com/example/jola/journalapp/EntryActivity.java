@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,16 +22,18 @@ import java.util.Date;
 
 public class EntryActivity extends AppCompatActivity {
     EditText title;
-    TextView content;
+    EditText content;
+    Button saveEntry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
         title = (EditText) findViewById(R.id.title);
-        content = (TextView) findViewById(R.id.content);
+        content = (EditText) findViewById(R.id.content);
+        saveEntry = (Button) findViewById(R.id.save_entry);
         final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         final Date date = new Date();
-        content.setOnClickListener(new View.OnClickListener() {
+        saveEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatabaseUtil().getDb(getApplicationContext()).userDao()

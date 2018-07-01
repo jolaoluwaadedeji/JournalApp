@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationActivity">
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="157dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="136dp"
+        android:hint="E-mail"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorBlack"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="232dp"
+        android:hint="Password"
+        android:textColor="@color/colorBlack"/>
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="216dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="141dp"
+        android:layout_marginEnd="79dp"
+        android:layout_marginRight="79dp"
+        android:text="Register"
+        android:background="@color/colorAccent"
+        />
+</RelativeLayout>

@@ -19,18 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity  android:name=".EntryActivity" android:parentActivityName=".ViewEntriesActivity">
+        <activity
+            android:name=".EntryActivity"
+            android:parentActivityName=".ViewEntriesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ViewEntriesActivity"></meta-data>
+                android:value=".ViewEntriesActivity" />
         </activity>
         <activity
             android:name=".ViewEntriesActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"></meta-data>
+                android:value=".MainActivity" />
         </activity>
+        <activity android:name=".RegistrationActivity"></activity>
     </application>
 
 </manifest>

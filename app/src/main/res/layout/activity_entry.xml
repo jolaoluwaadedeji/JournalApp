@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
     tools:context=".EntryActivity">
 
     <EditText
@@ -18,10 +17,9 @@
         android:hint="Title"
         android:text="Title"
         android:backgroundTint="@color/colorAccent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"/>
+         />
 
-    <TextView
+    <EditText
         android:layout_width="301dp"
         android:id="@+id/content"
         android:layout_height="80dp"
@@ -34,8 +32,9 @@
         android:contentDescription="Pen Your Thought Here"
         android:hint="Pen Your Thought"
         android:text="Pen Your Thought"
-        android:focusable="true"
-        android:focusableInTouchMode="true"/>
+        android:inputType="textMultiLine"
+        android:backgroundTint="@color/colorAccent"
+        />
 
     <Button
         android:id="@+id/save_entry"
