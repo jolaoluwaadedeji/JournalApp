@@ -23,7 +23,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(UserAdapter.ViewHolder holder, int position) {
-        holder.data.setText(entries.get(position).getTitle());
+        holder.title.setText(entries.get(position).getTitle());
+        String content = (entries.get(position).getContent());
+        holder.content.setText(content.length() <= 20 ? content
+                :content.substring(0,20)+"...");
+        holder.lastModifiedDate.setText(String.format("Modified: %s"
+                ,entries.get(position).getLastModifiedDate()));
     }
 
     @Override
@@ -32,10 +37,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView data;
+        public TextView title;
+        public  TextView content;
+        public TextView lastModifiedDate;
         public ViewHolder(View itemView){
             super(itemView);
-            data = (TextView) itemView.findViewById(R.id.data);
+            title = (TextView) itemView.findViewById(R.id.data);
+            content = (TextView) itemView.findViewById(R.id.content);
+            lastModifiedDate = (TextView) itemView.findViewById(R.id.last_modified_date);
+
         }
     }
 }

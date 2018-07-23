@@ -37,7 +37,7 @@ public class EntryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new DatabaseUtil().getDb(getApplicationContext()).userDao()
-                        .insertAll(new Entry(title.getText().toString(),
+                        .insertEntry(new Entry(title.getText().toString(),
                                 content.getText().toString(),formatter.format(date)));
                 startActivity(new Intent(EntryActivity.this,ViewEntriesActivity.class));
             }

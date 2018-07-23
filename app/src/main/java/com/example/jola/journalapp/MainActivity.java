@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ProgressDialog progressDialog;
     private static final int RC_SIGN_IN = 20;
     private  static  final String TAG = "Exception Handler";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
-        //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser == null){
-            updateUI(false,"You are not logged in!");
-        }
+        getCurrentUser();
     }
     @Override
     public void onClick(View view){
@@ -123,24 +120,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             handleSignInResult(task);
         }
     }
+
+    private GoogleSignInAccount getCurrentUser(){
+        try {
+            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+            //FirebaseUser currentUser = mAuth.getCurrentUser();
+            if (account == null) {
+                updateUI(false, "You are not logged in!");
+                return null;
+            }
+            return account;
+        }
+        catch (Exception ex){
+            Log.w(TAG, String.format("ErrorOccurred:Failure",ex.toString()));
+            updateUI(false,"Failed to get the current user!");
+            return  null;
+        }
+
+    }
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
              if(completedTask.isSuccessful()) {
+                // Sign in success, update UI with the signed-in user's information
+                 Log.d(TAG, "SignInWithCredential:Success");
+                 updateUI(true,"Login successful!");
                  account = completedTask.getResult(ApiException.class);
                  firebaseAuthWithGoogle(account);
              }
+             else {
+                // If sign in fails, display a message to the user.
+                Log.w(TAG, "SignInWithCredential:Failure", completedTask.getException());
+                updateUI(false,"Login failed!");
+            }
         }
-        catch (ApiException e) {
+        catch (Exception e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "Error occurred=" + e.getStatusCode());
-            updateUI(false,"Error occurred while signing in!");
+            Log.e(TAG, "ErrorOccurred:" + e.toString());
+            updateUI(false,"Error Occurred While Signing In!");
         }
     }
 
     private void updateUI(boolean loginStatus,String statusMessage){
         try{
-            Toast.makeText(this, statusMessage, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, statusMessage, Toast.LENGTH_SHORT).show();
             if(loginStatus){
                 Intent intent = new Intent(MainActivity.this, ViewEntriesActivity.class);
                 intent.putExtra("key", "Started From The MainActivity"); //Optional parameters
@@ -148,41 +171,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         catch (Exception ex){
-            Log.e(TAG, "Error occurred=" + ex.toString());
+            Log.e(TAG, "ErrorOccurred:" + ex.toString());
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+        Log.d(TAG, "FirebaseAuthWithGoogle:" + acct.getId());
         progressDialog.show();
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(true,"Firebase Login Successful");
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            updateUI(false,"Firebase Login Failed");
-                        }
-                    }
-                });
+        mAuth.signInWithCredential(credential);
     }
+
     private void signOut() {
-        // Firebase sign out
-        mAuth.signOut();
         // Google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        updateUI(false,"Sign Out Successful!");
-                    }
-                });
+        if(getCurrentUser()!= null) {
+            mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                    new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                updateUI(false, "Signed out successfully!");
+                                // Firebase sign out
+                                mAuth.signOut();
+                            } else {
+                                Log.w(TAG, "SignOutFailed", task.getException());
+                                updateUI(false, "Sign out failed!");
+                            }
+                        }
+                    });
+        }
+        else{
+            updateUI(false, "You are not logged in");
+        }
     }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

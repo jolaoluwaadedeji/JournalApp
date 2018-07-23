@@ -3,6 +3,8 @@ package com.example.jola.journalapp;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
+import android .arch.persistence.room.Delete;
 
 import com.example.jola.journalapp.Entry;
 
@@ -14,5 +16,14 @@ public interface UserDao {
     List<Entry> getAllEntries();
 
     @Insert
-    void insertAll(Entry... entries);
+    void insertEntry(Entry entry);
+
+    @Update
+    int updateEntry(Entry entry);
+
+    @Query("DELETE FROM Entry")
+    void deleteAllEntries();
+
+    @Delete
+    void deleteEntry(Entry entry);
 }

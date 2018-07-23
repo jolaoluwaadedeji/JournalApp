@@ -47,4 +47,17 @@
         android:text="Register"
         android:background="@color/colorAccent"
         />
+    <Button
+        android:id="@+id/SignIn"
+        android:layout_width="216dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="141dp"
+        android:layout_marginEnd="79dp"
+        android:layout_marginRight="79dp"
+        android:text="S"
+        android:background="@color/colorAccent"
+        />
 </RelativeLayout>

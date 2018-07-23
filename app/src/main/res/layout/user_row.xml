@@ -7,8 +7,33 @@
         android:layout_height="wrap_content"
         android:id="@+id/data"
         android:paddingLeft="20dp"
-        android:paddingBottom="30dp"
-        android:textSize="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="18dp"
         android:textStyle="bold"
+        android:textColor="@color/colorBlack"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="16dp"
+        android:lineSpacingExtra="-5dp"
+        android:id="@+id/content"
+        android:textColor="@color/colorBlack"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingBottom="5dp"
+        android:textSize="12dp"
+        android:id="@+id/last_modified_date"
+        android:textColor="@color/colorBlack"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/separator"
+        android:background="@color/colorAccent"/>
 </LinearLayout>
